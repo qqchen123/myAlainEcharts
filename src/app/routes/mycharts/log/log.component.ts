@@ -67,6 +67,17 @@ export class MychartsLogComponent implements OnInit {
         interval: 5,
         axisLabel: {
           formatter: '{value} °C'
+        },
+        // position:'left'
+      },
+      {
+        type: 'value',
+        name: 'Temperature2',
+        interval: 20,
+        //设置y轴偏移量
+        offset: 80,
+        axisLabel: {
+          formatter: '{value} °C'
         }
       }
     ],
@@ -104,6 +115,7 @@ export class MychartsLogComponent implements OnInit {
         data: [
           -2.6, -5.9, -9.0, -26.4, -28.7, -70.7, -175.6, -182.2, -48.7, -18.8, -6.0, -2.3
         ],
+        //设置柱子重叠
         barGap: "-100%",
         itemStyle:{
           color:'none',
@@ -129,6 +141,17 @@ export class MychartsLogComponent implements OnInit {
           }
         },
         data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+      },
+      {
+        name: 'Temperature',
+        type: 'line',
+        yAxisIndex: 2,
+        tooltip: {
+          valueFormatter: function (value:any) {
+            return value + ' °C';
+          }
+        },
+        data: [12.0, 12.2, 13.3, 14.5, 16.3, 110.2, 120.3, 123.4, 123.0, 116.5, 112.0, 16.2]
       }
     ]
   };
