@@ -1,0 +1,18 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+  </ng-template>
+</page-header>
+<nz-card>
+  <form [formGroup]="contactForm" (submit)="onSubmit()">
+    <div formArrayName="contacts">
+      <div *ngFor="let contact of contacts.controls;let i = index" [formGroupName]="i">
+        <input type="text" formControlName="user">
+        <input type="text" formControlName="address">
+        <input type="text" formControlName="phone">
+        <button (click)="removeContact(i)">-</button>
+      </div>
+    </div>
+    <button (click)="addContacts()">add</button>
+    <button>sub</button>
+  </form>
+</nz-card>

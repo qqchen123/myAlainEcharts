@@ -1,0 +1,11 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+  </ng-template>
+</page-header>
+<nz-card>
+<form #f="ngForm" (submit)="onSubmit(f)" >
+  <input type="text" name="username[]" ngModel>
+  <input type="text" name="username[]" ngModel>
+  <button>sub</button>
+</form>
+</nz-card>
