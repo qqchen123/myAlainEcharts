@@ -1,32 +1,20 @@
 <page-header [action]="phActionTpl">
-  <ng-template #phActionTpl>
-  </ng-template>
+  <ng-template #phActionTpl> </ng-template>
 </page-header>
 <nz-card>
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <ng-container formArrayName="city">
       <nz-form-item *ngFor="let control of city.controls; let i = index" [formGroupName]="i">
-        <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i === 0">
-          Passengers
-        </nz-form-label>
+        <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i === 0"> Passengers </nz-form-label>
         <nz-form-control
           [nzXs]="24"
           [nzSm]="20"
           [nzOffset]="i === 0 ? 0 : 4"
           nzErrorTip="Please input passenger's name or delete this field."
         >
-          <input
-            class="passenger-input"
-            nz-input
-            placeholder="placeholder"
-            [formControlName]="'cityName'"
-          />
-          <span
-            nz-icon
-            nzType="minus-circle-o"
-            class="dynamic-delete-button"
-            (click)="removeField(i,$event)"
-          ></span>
+          <nz-cascader class="passenger-input" [nzOptions]="nzOptions" [formControlName]="'cityName'" (ngModelChange)="onChanges($event)">
+          </nz-cascader>
+          <span nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(i, $event)"></span>
         </nz-form-control>
       </nz-form-item>
     </ng-container>

@@ -1,15 +1,50 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {STColumn, STComponent} from '@delon/abc/st';
-import {SFSchema} from '@delon/form';
-import {ModalHelper, _HttpClient} from '@delon/theme';
-import {
-  FormArray, FormControl,
-  FormGroup,
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators
-} from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { STColumn, STComponent } from '@delon/abc/st';
+import { SFSchema } from '@delon/form';
+import { ModalHelper, _HttpClient } from '@delon/theme';
+
+const options = [
+  {
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+      {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+          {
+            value: 'xihu',
+            label: 'West Lake',
+            isLeaf: true
+          }
+        ]
+      },
+      {
+        value: 'ningbo',
+        label: 'Ningbo',
+        isLeaf: true
+      }
+    ]
+  },
+  {
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+      {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+          {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men',
+            isLeaf: true
+          }
+        ]
+      }
+    ]
+  }
+];
 
 @Component({
   selector: 'app-mycharts-tlist',
@@ -43,15 +78,17 @@ import {
       }
     `
   ]
-
 })
 export class MychartsTlistComponent implements OnInit {
   validateForm!: UntypedFormGroup;
 
-  constructor(private fb: UntypedFormBuilder) {
-  }
+  nzOptions: any[] | null = null;
+  values: any[] | null = null;
+
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
+    this.nzOptions = options;
     this.validateForm = this.fb.group({
       city: this.fb.array([])
     });
@@ -59,7 +96,7 @@ export class MychartsTlistComponent implements OnInit {
   }
 
   get city() {
-    return this.validateForm.get('city') as FormArray
+    return this.validateForm.get('city') as FormArray;
   }
 
   addField(e?: MouseEvent): void {
@@ -68,10 +105,10 @@ export class MychartsTlistComponent implements OnInit {
     }
 
     let cityGroup = this.fb.group({
-      cityName: ['',Validators.required]
-    })
-    this.city.push(cityGroup)
-    console.log(this.city.value)
+      cityName: ['', Validators.required]
+    });
+    this.city.push(cityGroup);
+    console.log(this.city.value);
     // this.validateForm.addControl(
     //   new UntypedFormControl(null, Validators.required)
     // );
@@ -91,10 +128,13 @@ export class MychartsTlistComponent implements OnInit {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({onlySelf: true});
+          control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
   }
 
+  onChanges(values: any): void {
+    console.log(values, this.values);
+  }
 }
