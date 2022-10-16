@@ -85,7 +85,7 @@ export class MychartsTlistComponent implements OnInit {
   nzOptions: any[] | null = null;
   values: any[] | null = null;
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: UntypedFormBuilder, private http: _HttpClient) {}
 
   ngOnInit(): void {
     this.nzOptions = options;
@@ -109,9 +109,6 @@ export class MychartsTlistComponent implements OnInit {
     });
     this.city.push(cityGroup);
     console.log(this.city.value);
-    // this.validateForm.addControl(
-    //   new UntypedFormControl(null, Validators.required)
-    // );
   }
 
   removeField(i: number, e: MouseEvent): void {
@@ -122,7 +119,7 @@ export class MychartsTlistComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
+    /*if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -131,7 +128,11 @@ export class MychartsTlistComponent implements OnInit {
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
-    }
+    }*/
+    console.log(this.validateForm.value);
+    this.http.post('http://localhost:8082/index/index', this.validateForm.value).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 
   onChanges(values: any): void {
