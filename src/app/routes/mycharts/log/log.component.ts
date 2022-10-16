@@ -1,8 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { STColumn, STComponent } from '@delon/abc/st';
 import { ChartEChartsEvent, ChartEChartsOption } from '@delon/chart/chart-echarts';
 import { SFSchema } from '@delon/form';
-import { ModalHelper, _HttpClient } from '@delon/theme';
+import { ModalHelper, _HttpClient, SettingsService } from '@delon/theme';
 import * as echart from 'echarts';
 
 @Component({
@@ -10,7 +10,7 @@ import * as echart from 'echarts';
   templateUrl: './log.component.html'
 })
 export class MychartsLogComponent implements OnInit {
-  constructor(private http: _HttpClient, private modal: ModalHelper) {}
+  constructor(private http: _HttpClient, private modal: ModalHelper, private settings: SettingsService) {}
 
   ngOnInit(): void {
     this.option1 = {
@@ -143,6 +143,7 @@ export class MychartsLogComponent implements OnInit {
       ]
     };
     this.cardWidth = this.w();
+    console.log(this.settings.layout.collapsed, '-----layout-----');
   }
 
   add(): void {}
@@ -308,9 +309,10 @@ export class MychartsLogComponent implements OnInit {
   }
 
   w() {
-    let w = window.screen.width - 300;
-    // let w = mycard.clientWidth;
-    return `${w}px`;
+    // let w = window.screen.width - 300;
+    //
+    let w = document.documentElement.clientWidth || document.body.clientWidth;
+    return `${w - 400}px`;
   }
 
   @HostListener('window:resize', ['$event'])
