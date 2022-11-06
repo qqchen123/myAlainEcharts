@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { SettingsService, User } from '@delon/theme';
-import { LayoutDefaultOptions } from '@delon/theme/layout-default';
+import { LayoutDefaultHeaderItemComponent, LayoutDefaultOptions } from '@delon/theme/layout-default';
 import { environment } from '@env/environment';
 
 @Component({
@@ -87,6 +87,7 @@ export class LayoutBasicComponent {
     logoExpanded: `./assets/logo-full.svg`,
     logoCollapsed: `./assets/logo.svg`
   };
+
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;
   get user(): User {
@@ -100,4 +101,6 @@ export class LayoutBasicComponent {
   ldchange($event: Event) {
     console.log('ldchange');
   }
+
+  dochange() {}
 }

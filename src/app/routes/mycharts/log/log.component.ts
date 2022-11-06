@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { STColumn, STComponent } from '@delon/abc/st';
-import { ChartEChartsEvent, ChartEChartsOption } from '@delon/chart/chart-echarts';
+import { ChartEChartsEvent, ChartEChartsOn, ChartEChartsOption } from '@delon/chart/chart-echarts';
 import { SFSchema } from '@delon/form';
 import { ModalHelper, _HttpClient, SettingsService } from '@delon/theme';
 import * as echart from 'echarts';
@@ -303,6 +303,15 @@ export class MychartsLogComponent implements OnInit {
   };
 
   cardWidth: string = '';
+
+  on: ChartEChartsOn[] = [
+    {
+      eventName: 'click',
+      handler: ({ event, chart }) => {
+        console.log(`${event.type}: ${event.name} - ${event.value} (${chart.id})`);
+      }
+    }
+  ];
 
   handleEvents(ev: ChartEChartsEvent): void {
     console.log(ev);
