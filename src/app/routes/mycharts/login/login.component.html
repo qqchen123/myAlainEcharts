@@ -3,7 +3,7 @@
   </ng-template>
 </page-header>
 <nz-card>
-  <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <!--<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your username!">
         <nz-input-group nzPrefixIcon="user">
@@ -23,5 +23,43 @@
         <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
       </nz-form-control>
     </nz-form-item>
-  </form>
+  </form>-->
+  <button nz-button nzType="primary" (click)="changecss()">Primary Button</button>
+
+  <nz-table #basicTable nzBordered [nzData]="listOfData" [nzWidthConfig]="widthConfig">
+    <!--<thead>
+    <tr>
+      <th style="display: none">Name</th>
+      <th>Age</th>
+      <th>Address</th>
+      <th>Address</th>
+      <th>Action</th>
+    </tr>
+    </thead>-->
+    <tbody>
+    <tr >
+      <ng-container *ngFor="let data of basicTable.data let i=index">
+        <td *ngIf="i===tnum" class="namest" [ngClass]="names+i">{{ data.name }}</td>
+        <td *ngIf="i!==tnum"  [ngClass]="names+i">{{ data.name }}</td>
+      </ng-container>
+    </tr>
+    <tr >
+      <ng-container *ngFor="let data of basicTable.data let i=index">
+        <td class="age{{i}}">{{ data.age }}</td>
+      </ng-container>
+    </tr>
+    <tr >
+      <ng-container *ngFor="let data of basicTable.data let i=index">
+        <td class="address{{i}}">{{ data.address }}</td>
+      </ng-container>
+<!--      <td>{{ data.age }}</td>-->
+<!--      <td>{{ data.address }}</td>-->
+<!--      <td>-->
+<!--        <a>Action 一 {{ data.name }}</a>-->
+<!--        <nz-divider nzType="vertical"></nz-divider>-->
+<!--        <a>Delete</a>-->
+<!--      </td>-->
+    </tr>
+    </tbody>
+  </nz-table>
 </nz-card>
