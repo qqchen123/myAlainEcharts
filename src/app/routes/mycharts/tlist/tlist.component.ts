@@ -283,12 +283,25 @@ export class MychartsTlistComponent implements OnInit {
       radius: [0, '50%'],
       emphasis: { focus: 'ancestor' },
       levels: [
-        { itemStyle: { color: '#fff' } },    //由内而外第一级别样式
+        {
+          itemStyle:
+            {
+              color: '#fff'
+            }
+        },    //由内而外第一级别样式
         {
           r0: '15%',
           r: '35%',
-          itemStyle: { borderWidth: 1.5 },
-          label: { align: 'center', fontSize: 14, rotate: '0', silent: true,color:"#fff" }
+          itemStyle: {
+            borderWidth: 1.5
+          },
+          label: {
+            align: 'center',
+            fontSize: 14,
+            rotate: '0',
+            silent: true,
+            color:"#fff"
+          }
         },
         {                         //由内而外第二级别样式
           r0: '35%',
@@ -297,7 +310,7 @@ export class MychartsTlistComponent implements OnInit {
             fontSize: 12,
             color: '#333',
             position: 'outside',   //标签显示外围
-            distance: 40,    //标签和图距离
+            distance: 80,    //标签和图距离
             rotate: 0     //标签旋转角度
           },
 
@@ -305,7 +318,9 @@ export class MychartsTlistComponent implements OnInit {
             show: true     //引导线
           },
 
-          itemStyle: { borderWidth: 1.5 }    //扇形边框
+          itemStyle: {
+            borderWidth: 1.5
+          }    //扇形边框
         }
       ]
     }
