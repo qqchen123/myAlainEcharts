@@ -2,34 +2,5 @@
   <ng-template #phActionTpl> </ng-template>
 </page-header>
 <nz-card>
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <ng-container formArrayName="city">
-      <nz-form-item *ngFor="let control of city.controls; let i = index" [formGroupName]="i">
-        <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i === 0"> Passengers </nz-form-label>
-        <nz-form-control
-          [nzXs]="24"
-          [nzSm]="20"
-          [nzOffset]="i === 0 ? 0 : 4"
-          nzErrorTip="Please input passenger's name or delete this field."
-        >
-          <nz-cascader class="passenger-input" [nzOptions]="nzOptions" [formControlName]="'cityName'" (ngModelChange)="onChanges($event)">
-          </nz-cascader>
-          <span nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(i, $event)"></span>
-        </nz-form-control>
-      </nz-form-item>
-    </ng-container>
-    <nz-form-item>
-      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-        <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
-          <span nz-icon nzType="plus"></span>
-          Add field
-        </button>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-        <button nz-button nzType="primary">Submit</button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+  <chart-echarts [option]="option" ></chart-echarts>
 </nz-card>
